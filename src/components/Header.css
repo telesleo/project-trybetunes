@@ -1,0 +1,30 @@
+.header {
+  background-color: rgb(66, 37, 80);
+  color: white;
+}
+
+.black {
+  background-color: black;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+p {
+  font-size: 3;
+  font-weight: 300;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20%;
+  justify-items: stretch;
+}
+
+.container div {
+  min-width: 100px;
+}

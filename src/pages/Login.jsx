@@ -14,16 +14,20 @@ class Login extends React.Component {
     };
 
     this.onInputChange = this.onInputChange.bind(this);
+    this.nameValidation = this.nameValidation.bind(this);
     this.login = this.login.bind(this);
   }
 
   onInputChange(event) {
     const { value } = event.target;
 
-    this.setState({ username: value });
+    this.setState({ username: value }, this.nameValidation);
+  }
 
+  nameValidation() {
+    const { username } = this.state;
     const minCharacterCount = 3;
-    if (value.length >= minCharacterCount) {
+    if (username.length >= minCharacterCount) {
       this.setState({ buttonDisabled: false });
     } else {
       this.setState({ buttonDisabled: true });

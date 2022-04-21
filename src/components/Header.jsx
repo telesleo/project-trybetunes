@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
 
+import './Header.css';
+
 class Header extends React.Component {
   constructor() {
     super();
@@ -19,6 +21,7 @@ class Header extends React.Component {
   }
 
   render() {
+    const { tab } = this.props;
     const { loading, username } = this.state;
 
     let loadingMessage;
@@ -27,13 +30,30 @@ class Header extends React.Component {
     }
 
     return (
-      <div data-testid="header-component">
-        Header
-        <Link data-testid="link-to-search" to="/search"> Pesquisa </Link>
-        <Link data-testid="link-to-favorites" to="/favorites"> Músicas Favoritas </Link>
-        <Link data-testid="link-to-profile" to="/profile"> Perfil </Link>
-        <h3 data-testid="header-user-name">{ username }</h3>
-        { loadingMessage }
+      <div data-testid="header-component" className="header container">
+        <div className={ (tab === 'search') ? 'black' : '' }>
+          <Link data-testid="link-to-search" class="link" to="/search">
+            <p>Pesquisa</p>
+          </Link>
+        </div>
+        <div className={ (tab === 'favorites') ? 'black' : '' }>
+          <Link
+            data-testid="link-to-favorites"
+            class="link"
+            to="/favorites"
+          >
+            <p>Músicas Favoritas</p>
+          </Link>
+        </div>
+        <div className={ (tab === 'profile') ? 'black' : '' }>
+          <Link data-testid="link-to-profile" class="link" to="/profile">
+            <p>Perfil</p>
+          </Link>
+        </div>
+        <div>
+          <p data-testid="header-user-name">{username}</p>
+          {loadingMessage }
+        </div>
       </div>
     );
   }

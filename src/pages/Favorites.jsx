@@ -1,12 +1,41 @@
 import React from 'react';
 import Header from '../components/Header';
+import MusicList from '../components/MusicList';
+import Loading from '../components/Loading';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Favorites extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      favoriteSongs: [],
+      loading: true,
+    };
+
+    this.updateFavoriteSongs = this.updateFavoriteSongs.bind(this);
+  }
+
+  async componentDidMount() {
+    this.updateFavoriteSongs();
+  }
+
+  async updateFavoriteSongs() {
+    this.setState({ loading: true });
+    const favoriteSongs = await getFavoriteSongs();
+    this.setState({ favoriteSongs, loading: false });
+  }
+
   render() {
+    const { favoriteSongs, loading } = this.state;
+
     return (
       <div data-testid="page-favorites">
-        <Header />
-        Favorites
+        <Header tab="favorites" />
+        {(loading) ? <Loading /> : <MusicList
+          songs={ favoriteSongs }
+          updateSongs={ this.updateFavoriteSongs }
+        />}
       </div>
     );
   }
