@@ -57,10 +57,9 @@ class MusicList extends React.Component {
     );
 
     return (
-      <>
-        MusicList
+      <div>
         {(loading) ? <Loading /> : songElements }
-      </>
+      </div>
     );
   }
 }

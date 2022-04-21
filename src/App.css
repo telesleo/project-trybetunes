@@ -1,5 +1,66 @@
 body {
-  background-color: rgb(44, 44, 44);
+  background-color: rgb(22, 22, 22);
   color: white;
   text-align: center;
+}
+
+.page {
+  padding: 30px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.ul, ol {
+  list-style-type: none;
+  text-align: center;
+}
+
+li {
+  list-style-type: none;
+}
+
+.list li {
+  padding: 5px;
+}
+
+.list li:hover {
+  background-color: #2fc18c;
+}
+
+.searchBar {
+  border: none;
+  outline: none;
+  height: 30px;
+  font-size: 16px;
+  width: 40%;
+  border-radius: 50px;
+  margin: 0 10px;
+  padding: 5px 22px;
+}
+
+.searchButton {
+  border: none;
+  outline: none;
+  height: 40px;
+  padding: 5px 22px;
+  font-size: 16px;
+  border-radius: 50px;
+  background-color: #2fc18c;
+}
+
+.trackContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2fc18c;
+  padding: 3px;
+  border-radius: 200px;
+  margin: 0 30%;
+}
+
+.trackContainer div {
+  margin: 0 5px;
 }

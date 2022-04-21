@@ -1,9 +1,15 @@
+// srouce: https://stackoverflow.com/questions/39999367/how-do-i-reference-a-local-image-in-react
+
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
 
 import './Header.css';
+
+const logoImage = require('../Images/logoTrybeTunes.png').default;
+const profileImage = require('../Images/profile.png').default;
 
 class Header extends React.Component {
   constructor() {
@@ -31,6 +37,12 @@ class Header extends React.Component {
 
     return (
       <div data-testid="header-component" className="header container">
+        <div>
+          <img
+            src={ logoImage }
+            alt="Logo TrybeTunes"
+          />
+        </div>
         <div className={ (tab === 'search') ? 'black' : '' }>
           <Link data-testid="link-to-search" class="link" to="/search">
             <p>Pesquisa</p>
@@ -50,13 +62,20 @@ class Header extends React.Component {
             <p>Perfil</p>
           </Link>
         </div>
-        <div>
-          <p data-testid="header-user-name">{username}</p>
-          {loadingMessage }
+        <div className="containerProfile">
+          <p className="profileName" data-testid="header-user-name">{username}</p>
+          {loadingMessage}
+          <img
+            src={ profileImage }
+            alt="Logo TrybeTunes"
+          />
         </div>
       </div>
     );
   }
 }
+Header.propTypes = {
+  tab: PropTypes.isRequired,
+};
 
 export default Header;

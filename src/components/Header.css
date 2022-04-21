@@ -7,11 +7,6 @@
   background-color: black;
 }
 
-.link {
-  color: white;
-  text-decoration: none;
-}
-
 p {
   font-size: 3;
   font-weight: 300;
@@ -22,9 +17,23 @@ p {
   display: flex;
   justify-content: space-between;
   padding: 0 20%;
-  justify-items: stretch;
 }
 
 .container div {
-  min-width: 100px;
+  min-width: 120px;
+}
+
+img {
+  height: 42px;
+}
+
+.profileName {
+  color: #2fc18c;
+  padding: 0 10px;
+}
+
+.containerProfile {
+  align-items: center;
+  display: flex;
+  justify-items: stretch;
 }

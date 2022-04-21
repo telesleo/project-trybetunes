@@ -1,6 +1,6 @@
 import React from 'react';
-import Loading from './Loading';
 import PropTypes from 'prop-types';
+import Loading from './Loading';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -43,23 +43,29 @@ class MusicCard extends React.Component {
     return (
       <>
         <p>{trackName}</p>
-        <audio data-testid="audio-component" src={ previewUrl } controls>
-          <track kind="captions" />
-          O seu navegador não suporta o elemento
-          <code>audio</code>
-          .
-        </audio>
-        <label htmlFor={ trackId }>
-          Favorita
-          <input
-            data-testid={ `checkbox-music-${trackId}` }
-            id={ trackId }
-            type="checkbox"
-            checked={ favorited }
-            onClick={ this.onCheckboxChange }
-          />
-        </label>
-        {(loading) ? <Loading /> : <> </>}
+        <div className="trackContainer">
+          <div>
+            <audio data-testid="audio-component" src={ previewUrl } controls>
+              <track kind="captions" />
+              O seu navegador não suporta o elemento
+              <code>audio</code>
+              .
+            </audio>
+          </div>
+          <div>
+            <label htmlFor={ trackId }>
+              Favorita
+              <input
+                data-testid={ `checkbox-music-${trackId}` }
+                id={ trackId }
+                type="checkbox"
+                checked={ favorited }
+                onClick={ this.onCheckboxChange }
+              />
+            </label>
+          </div>
+          {(loading) ? <Loading /> : <> </>}
+        </div>
       </>
     );
   }

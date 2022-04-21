@@ -46,7 +46,10 @@ class Album extends React.Component {
     return (
       <div data-testid="page-album">
         <Header />
-        { (loading) ? <Loading /> : content }
+        <div className="page">
+          {(loading) ? <Loading /> : content}
+        </div>
+
       </div>
     );
   }

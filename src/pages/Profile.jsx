@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import { getUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 
+import './Profile.css';
+
 class Profile extends React.Component {
   constructor() {
     super();
@@ -25,15 +27,22 @@ class Profile extends React.Component {
     return (
       <div data-testid="page-profile">
         <Header tab="profile" />
-        {(loading) ? <Loading /> : (
-          <div>
-            <img data-testid="profile-image" src={ profile.image } alt="Foto Perfil" />
-            <h2>{profile.name}</h2>
-            <h3>{profile.email}</h3>
-            <p>{profile.description}</p>
-            <Link to="/profile/edit">Editar perfil</Link>
-          </div>
-        )}
+        <div className="page">
+          {(loading) ? <Loading /> : (
+            <div>
+              <img
+                data-testid="profile-image"
+                className="profileImage"
+                src={ profile.image }
+                alt="Foto Perfil"
+              />
+              <h2>{profile.name}</h2>
+              <p>{profile.description}</p>
+              <p className="email">{profile.email}</p>
+              <Link to="/profile/edit" class="editButton">Editar perfil</Link>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

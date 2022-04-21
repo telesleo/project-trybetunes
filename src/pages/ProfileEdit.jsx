@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import Loading from '../components/Loading';
 import { getUser, updateUser } from '../services/userAPI';
 
+import './ProfileEdit.css';
+
 class ProfileEdit extends Component {
   constructor() {
     super();
@@ -60,56 +62,67 @@ class ProfileEdit extends Component {
 
     const content = (
       <form>
-        <label htmlFor="name">
-          {'Name: '}
-          <input
-            data-testid="edit-input-name"
-            type="text"
-            name="name"
-            value={ name }
-            onChange={ this.onInputChange }
-          />
-        </label>
-        <label htmlFor="email">
-          {'Email: '}
-          <input
-            data-testid="edit-input-email"
-            type="text"
-            name="email"
-            value={ email }
-            onChange={ this.onInputChange }
-
-          />
-        </label>
-        <label htmlFor="description">
-          {'Descrição: '}
-          <input
-            data-testid="edit-input-description"
-            type="text"
-            name="description"
-            value={ description }
-            onChange={ this.onInputChange }
-
-          />
-        </label>
-        <label htmlFor="image">
-          {'Foto de Perfil: '}
-          <input
-            data-testid="edit-input-image"
-            type="text"
-            name="image"
-            value={ image }
-            onChange={ this.onInputChange }
-          />
-        </label>
-        <button
-          data-testid="edit-button-save"
-          type="submit"
-          disabled={ buttonDisabled }
-          onClick={ this.saveProfile }
-        >
-          Salvar
-        </button>
+        <div className="editProfileContainer">
+          <div>
+            <label htmlFor="name">
+              {'Name: '}
+              <input
+                data-testid="edit-input-name"
+                type="text"
+                name="name"
+                value={name}
+                onChange={this.onInputChange}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="email">
+              {'Email: '}
+              <input
+                data-testid="edit-input-email"
+                type="text"
+                name="email"
+                value={email}
+                onChange={this.onInputChange}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="description">
+              {'Descrição: '}
+              <textarea
+                data-testid="edit-input-description"
+                type="text"
+                name="description"
+                value={description}
+                onChange={this.onInputChange}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="image">
+              {'Foto de Perfil: '}
+              <input
+                data-testid="edit-input-image"
+                type="text"
+                name="image"
+                value={image}
+                onChange={this.onInputChange}
+              />
+            </label>
+          </div>
+          <div>
+            <button
+              data-testid="edit-button-save"
+              className="saveButton"
+              type="submit"
+              disabled={buttonDisabled}
+              onClick={this.saveProfile}
+            >
+              Salvar
+            </button>
+          </div>
+        </div>
       </form>
     );
 

@@ -1,0 +1,34 @@
+.editProfileContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.editProfileContainer div {
+  margin-top: 20px;
+}
+
+.editProfileContainer input {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  border-radius: 150px;
+}
+
+.editProfileContainer textarea {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  border-radius: 150px;
+  width: 50%;
+  height: 60px;
+  resize: none;
+}
+
+.saveButton {
+  background-color: #2fc18c;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  border-radius: 150px;
+}

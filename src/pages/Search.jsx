@@ -70,12 +70,14 @@ class Search extends React.Component {
         <>
           <input
             data-testid="search-artist-input"
+            className="searchBar"
             value={ searchValue }
             type="text"
             onChange={ this.onInputChange }
           />
           <button
             data-testid="search-artist-button"
+            className="searchButton"
             disabled={ searchDisabled }
             onClick={ this.search }
             type="submit"
@@ -98,6 +100,7 @@ class Search extends React.Component {
                 artistName: artist.artistName,
               } }
               data-testid={ `link-to-album-${artist.collectionId}` }
+              className="link"
             >
               {artist.collectionName}
             </Link>
@@ -106,7 +109,7 @@ class Search extends React.Component {
         artists = (
           <>
             <h2>{`Resultado de álbuns de: ${artistSearched}` }</h2>
-            <ul>
+            <ul className="list">
               {listOfArtists}
             </ul>
           </>
@@ -119,8 +122,10 @@ class Search extends React.Component {
     return (
       <div data-testid="page-search">
         <Header tab="search" />
-        { searchElements }
-        { artists }
+        <div className="page">
+          {searchElements}
+          {artists}
+        </div>
       </div>
     );
   }
