@@ -9,26 +9,26 @@
 }
 
 .editProfileContainer input {
-  padding: 10px 20px;
   border: none;
-  outline: none;
   border-radius: 150px;
+  outline: none;
+  padding: 10px 20px;
 }
 
 .editProfileContainer textarea {
-  padding: 10px 20px;
   border: none;
-  outline: none;
   border-radius: 150px;
-  width: 50%;
   height: 60px;
+  outline: none;
+  padding: 10px 20px;
   resize: none;
+  width: 50%;
 }
 
 .saveButton {
   background-color: #2fc18c;
-  padding: 10px 20px;
   border: none;
-  outline: none;
   border-radius: 150px;
+  outline: none;
+  padding: 10px 20px;
 }

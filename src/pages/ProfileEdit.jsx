@@ -70,8 +70,8 @@ class ProfileEdit extends Component {
                 data-testid="edit-input-name"
                 type="text"
                 name="name"
-                value={name}
-                onChange={this.onInputChange}
+                value={ name }
+                onChange={ this.onInputChange }
               />
             </label>
           </div>
@@ -82,8 +82,8 @@ class ProfileEdit extends Component {
                 data-testid="edit-input-email"
                 type="text"
                 name="email"
-                value={email}
-                onChange={this.onInputChange}
+                value={ email }
+                onChange={ this.onInputChange }
               />
             </label>
           </div>
@@ -94,8 +94,8 @@ class ProfileEdit extends Component {
                 data-testid="edit-input-description"
                 type="text"
                 name="description"
-                value={description}
-                onChange={this.onInputChange}
+                value={ description }
+                onChange={ this.onInputChange }
               />
             </label>
           </div>
@@ -106,8 +106,8 @@ class ProfileEdit extends Component {
                 data-testid="edit-input-image"
                 type="text"
                 name="image"
-                value={image}
-                onChange={this.onInputChange}
+                value={ image }
+                onChange={ this.onInputChange }
               />
             </label>
           </div>
@@ -116,8 +116,8 @@ class ProfileEdit extends Component {
               data-testid="edit-button-save"
               className="saveButton"
               type="submit"
-              disabled={buttonDisabled}
-              onClick={this.saveProfile}
+              disabled={ buttonDisabled }
+              onClick={ this.saveProfile }
             >
               Salvar
             </button>
