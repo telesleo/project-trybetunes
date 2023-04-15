@@ -30,6 +30,7 @@ class Album extends React.Component {
   }
 
   render() {
+    const { updateCurrSongUrl } = this.props;
     const { songs, loading, artistName, collectionName } = this.state;
 
     const content = (
@@ -37,6 +38,7 @@ class Album extends React.Component {
         <h2 data-testid="album-name">{collectionName}</h2>
         <h3 data-testid="artist-name">{artistName}</h3>
         <MusicList
+          updateCurrSongUrl={ updateCurrSongUrl }
           songs={ songs.slice(1, songs.length) }
         />
       </>
@@ -57,6 +59,7 @@ Album.propTypes = {
   match: PropTypes.isRequired,
   id: PropTypes.isRequired,
   params: PropTypes.isRequired,
+  updateCurrSongUrl: PropTypes.func.isRequired,
 };
 
 export default Album;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import MusicList from '../components/MusicList';
 import Loading from '../components/Loading';
@@ -27,6 +28,7 @@ class Favorites extends React.Component {
   }
 
   render() {
+    const { updateCurrSongUrl } = this.props;
     const { favoriteSongs, loading } = this.state;
 
     return (
@@ -35,10 +37,15 @@ class Favorites extends React.Component {
         {(loading) ? <Loading /> : <MusicList
           songs={ favoriteSongs }
           updateSongs={ this.updateFavoriteSongs }
+          updateCurrSongUrl={ updateCurrSongUrl }
         />}
       </div>
     );
   }
 }
+
+Favorites.propTypes = {
+  updateCurrSongUrl: PropTypes.func.isRequired,
+};
 
 export default Favorites;

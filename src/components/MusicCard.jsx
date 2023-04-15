@@ -36,7 +36,7 @@ class MusicCard extends React.Component {
   }
 
   render() {
-    const { song } = this.props;
+    const { song, updateCurrSongUrl } = this.props;
     const { trackName, previewUrl, trackId } = song;
     const { favorited, loading } = this.state;
 
@@ -44,14 +44,20 @@ class MusicCard extends React.Component {
       <>
         <p>{trackName}</p>
         <div className="trackContainer">
-          <div>
+          {/* <div>
             <audio data-testid="audio-component" src={ previewUrl } controls>
               <track kind="captions" />
               O seu navegador não suporta o elemento
               <code>audio</code>
               .
             </audio>
-          </div>
+          </div> */}
+          <button
+            type="button"
+            onClick={ () => { updateCurrSongUrl(previewUrl); } }
+          >
+            Play
+          </button>
           <div>
             <label htmlFor={ trackId }>
               Favorita
@@ -74,6 +80,7 @@ MusicCard.propTypes = {
   favoriteSongs: PropTypes.isRequired,
   song: PropTypes.isRequired,
   changeFavoriteSongs: PropTypes.isRequired,
+  updateCurrSongUrl: PropTypes.func.isRequired,
 };
 
 export default MusicCard;

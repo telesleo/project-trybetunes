@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const RANGE_UPDATE_RATE = 5;
 
@@ -18,11 +19,26 @@ class AudioPlayer extends React.Component {
 
   componentDidMount() {
     this.interval = setInterval(this.updatePlayerRange, RANGE_UPDATE_RATE);
-    this.audio.addEventListener('ended', () => this.setState({ playing: false }));
+    this.updateAudio();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { currentSongUrl } = this.props;
+
+    if (prevProps.currentSongUrl !== currentSongUrl) {
+      this.updateAudio(currentSongUrl);
+      this.playMusic();
+    }
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+
+  updateAudio = (newUrl) => {
+    this.audio.pause();
+    this.audio = new Audio(newUrl);
+    this.audio.addEventListener('ended', () => this.setState({ playing: false }));
   }
 
   playMusic = () => {
@@ -95,5 +111,9 @@ class AudioPlayer extends React.Component {
     );
   }
 }
+
+AudioPlayer.propTypes = {
+  currentSongUrl: PropTypes.string.isRequired,
+};
 
 export default AudioPlayer;
