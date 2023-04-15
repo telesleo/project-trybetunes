@@ -10,6 +10,7 @@ class AudioPlayer extends React.Component {
       playerRange: 0,
       playing: false,
       movingRange: false,
+      volume: 50,
     };
 
     this.audio = new Audio();
@@ -62,8 +63,13 @@ class AudioPlayer extends React.Component {
     if (playing) this.playMusic();
   }
 
+  changeVolume = ({ target }) => {
+    this.audio.volume = target.value / 100;
+    this.setState({ volume: target.value });
+  }
+
   render() {
-    const { playerRange, playing } = this.state;
+    const { playerRange, playing, volume } = this.state;
 
     return (
       <div>
@@ -80,6 +86,11 @@ class AudioPlayer extends React.Component {
         >
           {(playing) ? 'Pause' : 'Play'}
         </button>
+        <input
+          type="range"
+          onChange={ this.changeVolume }
+          value={ volume }
+        />
       </div>
     );
   }
