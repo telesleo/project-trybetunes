@@ -70,8 +70,10 @@ class AudioPlayer extends React.Component {
   }
 
   changeAudioTime = ({ target }) => {
-    this.audio.currentTime = (target.value / 100) * this.audio.duration;
-    this.setState({ playerRange: target.value });
+    if (this.audio.duration > 0) {
+      this.audio.currentTime = (target.value / 100) * this.audio.duration;
+      this.setState({ playerRange: target.value });
+    }
   }
 
   updatePlayerRange = () => {
@@ -137,7 +139,7 @@ class AudioPlayer extends React.Component {
               onChange={ this.changeAudioTime }
               onMouseDown={ this.startTimeMove }
               onMouseUp={ this.endTimeMove }
-              value={ playerRange }
+              value={ playerRange || 0 }
               style={ {
                 background: `linear-gradient(to right, #422550 0%, #422550
                 ${playerRange}%, #494949 
