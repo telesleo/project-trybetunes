@@ -54,8 +54,11 @@ class AudioPlayer extends React.Component {
   }
 
   updateAudio = (newUrl) => {
+    const { volume } = this.state;
+
     this.audio.pause();
     this.audio = new Audio(newUrl);
+    this.audio.volume = volume / 100;
     this.audio.addEventListener('ended', () => this.setState({ playing: false }));
   }
 
