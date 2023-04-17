@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './style.module.css';
 
 const RANGE_UPDATE_RATE = 5;
+const HALF = 50;
 
 class AudioPlayer extends React.Component {
   constructor() {
@@ -35,6 +37,17 @@ class AudioPlayer extends React.Component {
     clearInterval(this.interval);
   }
 
+  getVolumeIcon() {
+    const { volume } = this.state;
+
+    if (volume > HALF) {
+      return 'volume_up';
+    } if (volume > 1) {
+      return 'volume_down';
+    }
+    return 'volume_mute';
+  }
+
   updateAudio = (newUrl) => {
     this.audio.pause();
     this.audio = new Audio(newUrl);
@@ -52,8 +65,10 @@ class AudioPlayer extends React.Component {
   }
 
   changeAudioTime = ({ target }) => {
-    this.audio.currentTime = (target.value / 100) * this.audio.duration;
-    this.setState({ playerRange: target.value });
+    if (this.params && this.params.currentSongUrl) {
+      this.audio.currentTime = (target.value / 100) * this.audio.duration;
+      this.setState({ playerRange: target.value });
+    }
   }
 
   updatePlayerRange = () => {
@@ -88,25 +103,47 @@ class AudioPlayer extends React.Component {
     const { playerRange, playing, volume } = this.state;
 
     return (
-      <div>
-        <input
-          type="range"
-          onChange={ this.changeAudioTime }
-          onMouseDown={ this.startTimeMove }
-          onMouseUp={ this.endTimeMove }
-          value={ playerRange }
-        />
-        <button
-          type="button"
-          onClick={ (playing) ? this.pauseMusic : this.playMusic }
-        >
-          {(playing) ? 'Pause' : 'Play'}
-        </button>
-        <input
-          type="range"
-          onChange={ this.changeVolume }
-          value={ volume }
-        />
+      <div className={ styles.player }>
+        <div className={ styles['player-content'] }>
+          <div>
+            <button
+              className={ styles['play-button'] }
+              type="button"
+              onClick={ (playing) ? this.pauseMusic : this.playMusic }
+            >
+              <span className="material-symbols-outlined">
+                {(playing) ? 'pause' : 'play_arrow'}
+              </span>
+            </button>
+            <input
+              className={ styles.range }
+              type="range"
+              onChange={ this.changeAudioTime }
+              onMouseDown={ this.startTimeMove }
+              onMouseUp={ this.endTimeMove }
+              value={ playerRange || 0 }
+              style={ {
+                background: `linear-gradient(to right, #422550 0%, #422550
+                ${playerRange}%, #494949 ${playerRange}%, #494949 100%)`,
+              } }
+            />
+          </div>
+          <div>
+            <input
+              className={ styles.range }
+              type="range"
+              onChange={ this.changeVolume }
+              value={ volume }
+              style={ {
+                background: `linear-gradient(to right, #422550 0%, #422550
+                ${volume}%, #494949 ${volume}%, #494949 100%)`,
+              } }
+            />
+            <span className="material-symbols-outlined">
+              { this.getVolumeIcon() }
+            </span>
+          </div>
+        </div>
       </div>
     );
   }
