@@ -14,6 +14,7 @@ class AudioPlayer extends React.Component {
       playing: false,
       movingRange: false,
       volume: 50,
+      muted: false,
     };
 
     this.audio = new Audio();
@@ -38,7 +39,11 @@ class AudioPlayer extends React.Component {
   }
 
   getVolumeIcon() {
-    const { volume } = this.state;
+    const { volume, muted } = this.state;
+
+    if (muted) {
+      return 'volume_mute';
+    }
 
     if (volume > HALF) {
       return 'volume_up';
@@ -65,10 +70,8 @@ class AudioPlayer extends React.Component {
   }
 
   changeAudioTime = ({ target }) => {
-    if (this.params && this.params.currentSongUrl) {
-      this.audio.currentTime = (target.value / 100) * this.audio.duration;
-      this.setState({ playerRange: target.value });
-    }
+    this.audio.currentTime = (target.value / 100) * this.audio.duration;
+    this.setState({ playerRange: target.value });
   }
 
   updatePlayerRange = () => {
@@ -96,18 +99,31 @@ class AudioPlayer extends React.Component {
 
   changeVolume = ({ target }) => {
     this.audio.volume = target.value / 100;
-    this.setState({ volume: target.value });
+    this.setState({ volume: target.value, muted: false });
+  }
+
+  muteUnmute = () => {
+    this.setState((prevState) => ({
+      muted: (prevState.volume === 0) ? true : !prevState.muted,
+    }), () => {
+      const { muted, volume } = this.state;
+      if (muted) {
+        this.audio.volume = 0;
+      } else {
+        this.audio.volume = volume / 100;
+      }
+    });
   }
 
   render() {
-    const { playerRange, playing, volume } = this.state;
+    const { playerRange, playing, volume, muted } = this.state;
 
     return (
       <div className={ styles.player }>
         <div className={ styles['player-content'] }>
           <div>
             <button
-              className={ styles['play-button'] }
+              className={ `${styles['play-button']} ${styles.button}` }
               type="button"
               onClick={ (playing) ? this.pauseMusic : this.playMusic }
             >
@@ -121,10 +137,11 @@ class AudioPlayer extends React.Component {
               onChange={ this.changeAudioTime }
               onMouseDown={ this.startTimeMove }
               onMouseUp={ this.endTimeMove }
-              value={ playerRange || 0 }
+              value={ playerRange }
               style={ {
                 background: `linear-gradient(to right, #422550 0%, #422550
-                ${playerRange}%, #494949 ${playerRange}%, #494949 100%)`,
+                ${playerRange}%, #494949 
+                ${playerRange}%, #494949 100%)`,
               } }
             />
           </div>
@@ -133,15 +150,22 @@ class AudioPlayer extends React.Component {
               className={ styles.range }
               type="range"
               onChange={ this.changeVolume }
-              value={ volume }
+              value={ (muted) ? 0 : volume }
               style={ {
                 background: `linear-gradient(to right, #422550 0%, #422550
-                ${volume}%, #494949 ${volume}%, #494949 100%)`,
+                ${(muted) ? 0 : volume}%, #494949 
+                ${(muted) ? 0 : volume}%, #494949 100%)`,
               } }
             />
-            <span className="material-symbols-outlined">
-              { this.getVolumeIcon() }
-            </span>
+            <button
+              className={ styles.button }
+              type="button"
+              onClick={ this.muteUnmute }
+            >
+              <span className="material-symbols-outlined">
+                { this.getVolumeIcon() }
+              </span>
+            </button>
           </div>
         </div>
       </div>
