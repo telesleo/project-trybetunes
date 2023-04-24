@@ -85,9 +85,9 @@ class AudioPlayer extends React.Component {
   }
 
   updatePlayerRange = () => {
-    const { movingRange, audio } = this.state;
+    const { movingRange, audio, playing } = this.state;
 
-    if (movingRange) return;
+    if (movingRange || !playing) return;
 
     this.setState({ playerRange: (audio.currentTime * 100) / audio.duration });
   }
