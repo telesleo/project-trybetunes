@@ -8,7 +8,7 @@ import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import './App.css';
-import AudioPlayer from './pages/AudioPlayer';
+import AudioPlayer from './components/AudioPlayer';
 
 class App extends React.Component {
   constructor() {
