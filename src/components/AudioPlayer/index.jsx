@@ -4,6 +4,7 @@ import styles from './style.module.css';
 import Volume from '../Volume';
 
 const RANGE_UPDATE_RATE = 1000;
+const ONE_MINUTE_IN_SECONDS = 60;
 
 class AudioPlayer extends React.Component {
   constructor() {
@@ -101,6 +102,15 @@ class AudioPlayer extends React.Component {
     this.setState({ movingRange: false });
   }
 
+  formatTime = (seconds) => {
+    if (!seconds) return null;
+
+    const minutes = Math.floor(seconds / ONE_MINUTE_IN_SECONDS);
+    const remainingSeconds = parseInt(seconds % ONE_MINUTE_IN_SECONDS, 10)
+      .toString().padStart(2, '0');
+    return `${minutes}:${remainingSeconds}`;
+  }
+
   render() {
     const { playerRange, playing, audio, volume } = this.state;
 
@@ -117,19 +127,23 @@ class AudioPlayer extends React.Component {
                 {(playing) ? 'pause' : 'play_arrow'}
               </span>
             </button>
-            <input
-              className={ styles.range }
-              type="range"
-              onChange={ this.changeAudioTime }
-              onMouseDown={ this.startTimeMove }
-              onMouseUp={ this.endTimeMove }
-              value={ playerRange || 0 }
-              style={ {
-                background: `linear-gradient(to right, #422550 0%, #422550
-                ${playerRange}%, #494949 
-                ${playerRange}%, #494949 100%)`,
-              } }
-            />
+            <div>
+              <p>{ this.formatTime(audio.currentTime) || '0:00' }</p>
+              <input
+                className={ styles.range }
+                type="range"
+                onChange={ this.changeAudioTime }
+                onMouseDown={ this.startTimeMove }
+                onMouseUp={ this.endTimeMove }
+                value={ playerRange || 0 }
+                style={ {
+                  background: `linear-gradient(to right, #422550 0%, #422550
+                  ${playerRange}%, #494949 
+                  ${playerRange}%, #494949 100%)`,
+                } }
+              />
+              <p>{this.formatTime(audio.duration) || '0:00' }</p>
+            </div>
           </div>
           <div>
             <Volume audio={ audio } volume={ volume } setVolume={ this.setVolume } />
