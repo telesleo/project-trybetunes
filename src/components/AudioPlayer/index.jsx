@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './style.module.css';
 
-const RANGE_UPDATE_RATE = 5;
+const RANGE_UPDATE_RATE = 1000;
 const HALF = 50;
 
 class AudioPlayer extends React.Component {
@@ -10,27 +10,25 @@ class AudioPlayer extends React.Component {
     super();
 
     this.state = {
+      audio: new Audio(),
       playerRange: 0,
       playing: false,
       movingRange: false,
       volume: 50,
       muted: false,
     };
-
-    this.audio = new Audio();
   }
 
   componentDidMount() {
     this.interval = setInterval(this.updatePlayerRange, RANGE_UPDATE_RATE);
-    this.updateAudio();
+    this.updateAudioUrl();
   }
 
   componentDidUpdate(prevProps) {
     const { currentSongUrl } = this.props;
 
     if (prevProps.currentSongUrl !== currentSongUrl) {
-      this.updateAudio(currentSongUrl);
-      this.playMusic();
+      this.updateAudioUrl(currentSongUrl);
     }
   }
 
@@ -53,69 +51,88 @@ class AudioPlayer extends React.Component {
     return 'volume_mute';
   }
 
-  updateAudio = (newUrl) => {
-    const { volume } = this.state;
+  updateAudioUrl = (newUrl) => {
+    const { volume, audio } = this.state;
 
-    this.audio.pause();
-    this.audio = new Audio(newUrl);
-    this.audio.volume = volume / 100;
-    this.audio.addEventListener('ended', () => this.setState({ playing: false }));
+    audio.pause();
+
+    const newAudio = new Audio(newUrl);
+    newAudio.volume = volume / 100;
+    newAudio.addEventListener('ended', () => this.setState({ playing: false }));
+
+    this.setState({ audio: newAudio }, () => {
+      this.playMusic();
+      this.setState({ playerRange: 0 });
+    });
+
+    return newAudio;
   }
 
   playMusic = () => {
-    this.audio.play();
+    const { audio } = this.state;
+
+    audio.play();
     this.setState({ playing: true });
   }
 
   pauseMusic = () => {
-    this.audio.pause();
+    const { audio } = this.state;
+
+    audio.pause();
     this.setState({ playing: false });
   }
 
   changeAudioTime = ({ target }) => {
-    if (this.audio.duration > 0) {
-      this.audio.currentTime = (target.value / 100) * this.audio.duration;
+    const { audio } = this.state;
+
+    if (audio.duration > 0) {
+      audio.currentTime = (target.value / 100) * audio.duration;
+      audio.pause();
       this.setState({ playerRange: target.value });
     }
   }
 
   updatePlayerRange = () => {
-    const { movingRange } = this.state;
+    const { movingRange, audio } = this.state;
 
-    if (movingRange) {
-      return;
-    }
+    if (movingRange) return;
 
-    this.setState({ playerRange: (this.audio.currentTime * 100) / this.audio.duration });
+    this.setState({ playerRange: (audio.currentTime * 100) / audio.duration });
   }
 
   startTimeMove = () => {
-    this.setState({ movingRange: true });
+    const { audio } = this.state;
 
-    this.audio.pause();
+    audio.pause();
+
+    this.setState({ movingRange: true });
   }
 
   endTimeMove = () => {
-    this.setState({ movingRange: false });
-
     const { playing } = this.state;
     if (playing) this.playMusic();
+
+    this.setState({ movingRange: false });
   }
 
   changeVolume = ({ target }) => {
-    this.audio.volume = target.value / 100;
+    const { audio } = this.state;
+
+    audio.volume = target.value / 100;
     this.setState({ volume: target.value, muted: false });
   }
 
   muteUnmute = () => {
+    const { audio } = this.state;
+
     this.setState((prevState) => ({
       muted: (prevState.volume === 0) ? true : !prevState.muted,
     }), () => {
       const { muted, volume } = this.state;
       if (muted) {
-        this.audio.volume = 0;
+        audio.volume = 0;
       } else {
-        this.audio.volume = volume / 100;
+        audio.volume = volume / 100;
       }
     });
   }
