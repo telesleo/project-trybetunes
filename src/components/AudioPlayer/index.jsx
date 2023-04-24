@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './style.module.css';
+import Volume from '../Volume';
 
 const RANGE_UPDATE_RATE = 1000;
-const HALF = 50;
 
 class AudioPlayer extends React.Component {
   constructor() {
@@ -15,7 +15,6 @@ class AudioPlayer extends React.Component {
       playing: false,
       movingRange: false,
       volume: 50,
-      muted: false,
     };
   }
 
@@ -36,20 +35,7 @@ class AudioPlayer extends React.Component {
     clearInterval(this.interval);
   }
 
-  getVolumeIcon() {
-    const { volume, muted } = this.state;
-
-    if (muted) {
-      return 'volume_mute';
-    }
-
-    if (volume > HALF) {
-      return 'volume_up';
-    } if (volume > 1) {
-      return 'volume_down';
-    }
-    return 'volume_mute';
-  }
+  setVolume = (newVolume) => this.setState({ volume: newVolume });
 
   updateAudioUrl = (newUrl) => {
     const { volume, audio } = this.state;
@@ -115,30 +101,8 @@ class AudioPlayer extends React.Component {
     this.setState({ movingRange: false });
   }
 
-  changeVolume = ({ target }) => {
-    const { audio } = this.state;
-
-    audio.volume = target.value / 100;
-    this.setState({ volume: target.value, muted: false });
-  }
-
-  muteUnmute = () => {
-    const { audio } = this.state;
-
-    this.setState((prevState) => ({
-      muted: (prevState.volume === 0) ? true : !prevState.muted,
-    }), () => {
-      const { muted, volume } = this.state;
-      if (muted) {
-        audio.volume = 0;
-      } else {
-        audio.volume = volume / 100;
-      }
-    });
-  }
-
   render() {
-    const { playerRange, playing, volume, muted } = this.state;
+    const { playerRange, playing, audio, volume } = this.state;
 
     return (
       <div className={ styles.player }>
@@ -168,26 +132,7 @@ class AudioPlayer extends React.Component {
             />
           </div>
           <div>
-            <input
-              className={ styles.range }
-              type="range"
-              onChange={ this.changeVolume }
-              value={ (muted) ? 0 : volume }
-              style={ {
-                background: `linear-gradient(to right, #422550 0%, #422550
-                ${(muted) ? 0 : volume}%, #494949 
-                ${(muted) ? 0 : volume}%, #494949 100%)`,
-              } }
-            />
-            <button
-              className={ styles.button }
-              type="button"
-              onClick={ this.muteUnmute }
-            >
-              <span className="material-symbols-outlined">
-                { this.getVolumeIcon() }
-              </span>
-            </button>
+            <Volume audio={ audio } volume={ volume } setVolume={ this.setVolume } />
           </div>
         </div>
       </div>
