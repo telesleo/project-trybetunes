@@ -4,12 +4,21 @@ import styles from './style.module.css';
 
 class TrackInfo extends React.Component {
   render() {
-    const { trackName, artistName } = this.props;
+    const { trackName, artistName, artworkUrl, playing } = this.props;
 
     return (
       <div className={ styles['track-info'] }>
-        <h4>{ trackName || '' }</h4>
-        <p className={ styles['artist-name'] }>{ artistName || '' }</p>
+        <div className={ styles['track-and-artist'] }>
+          <h4>{ trackName || '' }</h4>
+          <p className={ styles['artist-name'] }>{ artistName || '' }</p>
+        </div>
+        { (artworkUrl) && (
+          <img
+            className={ `${styles['album-cover']} ${(playing) && styles.rotating}` }
+            src={ artworkUrl }
+            alt="Album cover"
+          />
+        ) }
       </div>
     );
   }
@@ -18,6 +27,8 @@ class TrackInfo extends React.Component {
 TrackInfo.propTypes = {
   trackName: PropTypes.string.isRequired,
   artistName: PropTypes.string.isRequired,
+  artworkUrl: PropTypes.string.isRequired,
+  playing: PropTypes.bool.isRequired,
 };
 
 export default TrackInfo;

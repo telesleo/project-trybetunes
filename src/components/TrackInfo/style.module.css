@@ -1,10 +1,11 @@
-.track-info {
+.track-and-artist {
   align-items: end;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-.track-info h4 {
+.track-and-artist h4 {
   font-weight: 500;
   margin: 0;
   margin-bottom: 3px;
@@ -15,4 +16,32 @@
   margin: 0;
   padding: 0;
   text-align: end;
+}
+
+.track-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.album-cover {
+  animation: rotate 40s linear infinite;
+  animation-play-state: paused;
+  border-radius: 100px;
+  height: 50px;
+  margin-left: 10px;
+}
+
+.rotating {
+  animation-play-state: running;
+}
+
+@keyframes rotate {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

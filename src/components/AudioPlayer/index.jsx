@@ -158,6 +158,8 @@ class AudioPlayer extends React.Component {
           <TrackInfo
             trackName={ currentSong?.trackName }
             artistName={ currentSong?.artistName }
+            artworkUrl={ currentSong?.artworkUrl100 }
+            playing={ playing }
           />
         </div>
       </div>
@@ -170,6 +172,7 @@ AudioPlayer.propTypes = {
     previewUrl: PropTypes.string,
     trackName: PropTypes.string,
     artistName: PropTypes.string,
+    artworkUrl100: PropTypes.string.isRequired,
   }).isRequired,
 };
 
