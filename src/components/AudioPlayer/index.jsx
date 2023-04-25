@@ -22,7 +22,6 @@ class AudioPlayer extends React.Component {
 
   componentDidMount() {
     this.interval = setInterval(this.updatePlayerRange, RANGE_UPDATE_RATE);
-    this.updateAudioUrl();
   }
 
   componentDidUpdate(prevProps) {
@@ -60,12 +59,17 @@ class AudioPlayer extends React.Component {
   }
 
   playMusic = () => {
+    const { currentSong } = this.props;
     const { audio } = this.state;
+
+    if (!currentSong?.previewUrl) return;
 
     audio.play();
     this.setState({ playing: true });
 
     this.updatePlayerRange();
+
+    console.log('play');
   }
 
   pauseMusic = () => {
