@@ -36,8 +36,8 @@ class MusicCard extends React.Component {
   }
 
   render() {
-    const { song, updateCurrSongUrl } = this.props;
-    const { trackName, previewUrl, trackId } = song;
+    const { song, updateCurrentSong } = this.props;
+    const { trackName, trackId } = song;
     const { favorited, loading } = this.state;
 
     return (
@@ -54,7 +54,7 @@ class MusicCard extends React.Component {
           </div> */}
           <button
             type="button"
-            onClick={ () => { updateCurrSongUrl(previewUrl); } }
+            onClick={ () => { updateCurrentSong(song); } }
           >
             Play
           </button>
@@ -80,7 +80,7 @@ MusicCard.propTypes = {
   favoriteSongs: PropTypes.isRequired,
   song: PropTypes.isRequired,
   changeFavoriteSongs: PropTypes.isRequired,
-  updateCurrSongUrl: PropTypes.func.isRequired,
+  updateCurrentSong: PropTypes.func.isRequired,
 };
 
 export default MusicCard;

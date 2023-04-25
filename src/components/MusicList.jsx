@@ -37,7 +37,7 @@ class MusicList extends React.Component {
   }
 
   render() {
-    const { songs, updateCurrSongUrl } = this.props;
+    const { songs, updateCurrentSong } = this.props;
     const { favoriteSongs, loading } = this.state;
 
     const listOfSongs = [...songs].map((song, index) => (
@@ -46,7 +46,7 @@ class MusicList extends React.Component {
           song={ song }
           changeFavoriteSongs={ this.changeFavoriteSongs }
           favoriteSongs={ favoriteSongs }
-          updateCurrSongUrl={ updateCurrSongUrl }
+          updateCurrentSong={ updateCurrentSong }
         />
       </li>
     ));
@@ -67,7 +67,7 @@ class MusicList extends React.Component {
 MusicList.propTypes = {
   songs: PropTypes.isRequired,
   updateSongs: PropTypes.isRequired,
-  updateCurrSongUrl: PropTypes.func.isRequired,
+  updateCurrentSong: PropTypes.func.isRequired,
 };
 
 export default MusicList;

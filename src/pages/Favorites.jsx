@@ -28,7 +28,7 @@ class Favorites extends React.Component {
   }
 
   render() {
-    const { updateCurrSongUrl } = this.props;
+    const { updateCurrentSong } = this.props;
     const { favoriteSongs, loading } = this.state;
 
     return (
@@ -37,7 +37,7 @@ class Favorites extends React.Component {
         {(loading) ? <Loading /> : <MusicList
           songs={ favoriteSongs }
           updateSongs={ this.updateFavoriteSongs }
-          updateCurrSongUrl={ updateCurrSongUrl }
+          updateCurrentSong={ updateCurrentSong }
         />}
       </div>
     );
@@ -45,7 +45,7 @@ class Favorites extends React.Component {
 }
 
 Favorites.propTypes = {
-  updateCurrSongUrl: PropTypes.func.isRequired,
+  updateCurrentSong: PropTypes.func.isRequired,
 };
 
 export default Favorites;

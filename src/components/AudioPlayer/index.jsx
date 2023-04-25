@@ -25,10 +25,10 @@ class AudioPlayer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { currentSongUrl } = this.props;
+    const { currentSong } = this.props;
 
-    if (prevProps.currentSongUrl !== currentSongUrl) {
-      this.updateAudioUrl(currentSongUrl);
+    if (currentSong && prevProps.currentSong !== currentSong) {
+      this.updateAudioUrl(currentSong.previewUrl);
     }
   }
 
@@ -160,7 +160,9 @@ class AudioPlayer extends React.Component {
 }
 
 AudioPlayer.propTypes = {
-  currentSongUrl: PropTypes.string.isRequired,
+  currentSong: PropTypes.shape({
+    previewUrl: PropTypes.string,
+  }).isRequired,
 };
 
 export default AudioPlayer;

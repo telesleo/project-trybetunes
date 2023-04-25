@@ -15,16 +15,16 @@ class App extends React.Component {
     super();
 
     this.state = {
-      currentSongUrl: '',
+      currentSong: {},
     };
   }
 
-  updateCurrSongUrl = (newUrl) => {
-    this.setState({ currentSongUrl: newUrl });
+  updateCurrentSong = (song) => {
+    this.setState({ currentSong: song });
   }
 
   render() {
-    const { currentSongUrl } = this.state;
+    const { currentSong } = this.state;
 
     return (
       <div>
@@ -36,14 +36,14 @@ class App extends React.Component {
               exact
               path="/album/:id"
               render={ (props) => (
-                <Album { ...props } updateCurrSongUrl={ this.updateCurrSongUrl } />
+                <Album { ...props } updateCurrentSong={ this.updateCurrentSong } />
               ) }
             />
             <Route
               exact
               path="/favorites"
               render={ (props) => (
-                <Favorites { ...props } updateCurrSongUrl={ this.updateCurrSongUrl } />
+                <Favorites { ...props } updateCurrentSong={ this.updateCurrentSong } />
               ) }
             />
             <Route exact path="/profile" component={ Profile } />
@@ -58,7 +58,7 @@ class App extends React.Component {
             />
             <Route path="/" component={ NotFound } />
           </Switch>
-          <AudioPlayer currentSongUrl={ currentSongUrl } />
+          <AudioPlayer currentSong={ currentSong } />
         </BrowserRouter>
       </div>
     );
