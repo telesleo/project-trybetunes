@@ -58,7 +58,7 @@ class Volume extends React.Component {
     const { muted } = this.state;
 
     return (
-      <div>
+      <>
         <input
           className={ styles.range }
           type="range"
@@ -79,7 +79,7 @@ class Volume extends React.Component {
             { this.getVolumeIcon() }
           </span>
         </button>
-      </div>
+      </>
     );
   }
 }

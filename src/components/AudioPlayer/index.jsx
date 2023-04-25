@@ -117,12 +117,13 @@ class AudioPlayer extends React.Component {
   }
 
   render() {
+    const { currentSong } = this.props;
     const { playerRange, playing, audio, volume } = this.state;
 
     return (
       <div className={ styles.player }>
         <div className={ styles['player-content'] }>
-          <div>
+          <div className={ styles['player-div'] }>
             <button
               className={ `${styles['play-button']} ${styles.button}` }
               type="button"
@@ -132,26 +133,32 @@ class AudioPlayer extends React.Component {
                 {(playing) ? 'pause' : 'play_arrow'}
               </span>
             </button>
-            <div>
-              <p>{ this.formatTime(audio.currentTime) || '0:00' }</p>
-              <input
-                className={ styles.range }
-                type="range"
-                onChange={ this.changeAudioTime }
-                onMouseDown={ this.startTimeMove }
-                onMouseUp={ this.endTimeMove }
-                value={ playerRange || 0 }
-                style={ {
-                  background: `linear-gradient(to right, #422550 0%, #422550
-                  ${playerRange}%, #494949 
-                  ${playerRange}%, #494949 100%)`,
-                } }
-              />
-              <p>{this.formatTime(audio.duration) || '0:00' }</p>
-            </div>
+            <p className={ styles['track-time'] }>
+              { this.formatTime(audio.currentTime) || '0:00' }
+            </p>
+            <input
+              className={ styles.range }
+              type="range"
+              onChange={ this.changeAudioTime }
+              onMouseDown={ this.startTimeMove }
+              onMouseUp={ this.endTimeMove }
+              value={ playerRange || 0 }
+              style={ {
+                background: `linear-gradient(to right, #422550 0%, #422550
+                ${playerRange}%, #494949 
+                ${playerRange}%, #494949 100%)`,
+              } }
+            />
+            <p className={ styles['track-time'] }>
+              {this.formatTime(audio.duration) || '0:00' }
+            </p>
           </div>
-          <div>
+          <div className={ styles['player-div'] }>
             <Volume audio={ audio } volume={ volume } setVolume={ this.setVolume } />
+          </div>
+          <div className={ styles['track-info'] }>
+            <h4>{ currentSong?.trackName }</h4>
+            <p className={ styles['artist-name'] }>{ currentSong?.artistName }</p>
           </div>
         </div>
       </div>
@@ -162,6 +169,8 @@ class AudioPlayer extends React.Component {
 AudioPlayer.propTypes = {
   currentSong: PropTypes.shape({
     previewUrl: PropTypes.string,
+    trackName: PropTypes.string,
+    artistName: PropTypes.string,
   }).isRequired,
 };
 
