@@ -152,8 +152,6 @@ class AudioPlayer extends React.Component {
             <p className={ styles['track-time'] }>
               {this.formatTime(audio.duration) || '0:00' }
             </p>
-          </div>
-          <div className={ styles['player-div'] }>
             <Volume audio={ audio } volume={ volume } setVolume={ this.setVolume } />
           </div>
           <div className={ styles['track-info'] }>

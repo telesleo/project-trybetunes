@@ -68,7 +68,7 @@ class Volume extends React.Component {
     const { muted, active } = this.state;
 
     return (
-      <>
+      <div className={ volumeStyles.volume }>
         <div
           className={ volumeStyles['volume-range'] }
           style={ { display: (active) ? 'flex' : 'none' } }
@@ -89,7 +89,7 @@ class Volume extends React.Component {
         </div>
         <button
           className={
-            `${styles.button} ${'button'}}`
+            styles.button
           }
           type="button"
           onClick={ this.muteUnmute }
@@ -104,7 +104,7 @@ class Volume extends React.Component {
             { this.getVolumeIcon() }
           </span>
         </button>
-      </>
+      </div>
     );
   }
 }
