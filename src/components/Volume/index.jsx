@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../AudioPlayer/style.module.css';
+import volumeStyles from './style.module.css';
 
 const HALF = 50;
 
@@ -10,6 +11,7 @@ class Volume extends React.Component {
 
     this.state = {
       muted: false,
+      active: false,
     };
   }
 
@@ -53,29 +55,52 @@ class Volume extends React.Component {
     });
   }
 
+  activate = () => {
+    this.setState({ active: true });
+  }
+
+  deactivate = () => {
+    this.setState({ active: false });
+  }
+
   render() {
     const { volume } = this.props;
-    const { muted } = this.state;
+    const { muted, active } = this.state;
 
     return (
       <>
-        <input
-          className={ styles.range }
-          type="range"
-          onChange={ this.changeVolume }
-          value={ (muted) ? 0 : volume }
-          style={ {
-            background: `linear-gradient(to right, #422550 0%, #422550
+        <div
+          className={ volumeStyles['volume-range'] }
+          style={ { display: (active) ? 'flex' : 'none' } }
+          onPointerEnter={ this.activate }
+          onPointerLeave={ this.deactivate }
+        >
+          <input
+            className={ styles.range }
+            type="range"
+            onChange={ this.changeVolume }
+            value={ (muted) ? 0 : volume }
+            style={ {
+              background: `linear-gradient(to right, #422550 0%, #422550
         ${(muted) ? 0 : volume}%, #494949 
         ${(muted) ? 0 : volume}%, #494949 100%)`,
-          } }
-        />
+            } }
+          />
+        </div>
         <button
-          className={ styles.button }
+          className={
+            `${styles.button} ${'button'}}`
+          }
           type="button"
           onClick={ this.muteUnmute }
+          onPointerEnter={ this.activate }
+          onPointerLeave={ this.deactivate }
         >
-          <span className="material-symbols-outlined">
+          <span
+            className={
+              `${'material-symbols-outlined'} ${volumeStyles['volume-icon']}`
+            }
+          >
             { this.getVolumeIcon() }
           </span>
         </button>

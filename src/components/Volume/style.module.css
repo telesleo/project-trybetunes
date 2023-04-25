@@ -1,0 +1,15 @@
+.volume-range {
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  position: absolute;
+  transform: translate(75px, 0);
+}
+
+.volume-icon {
+  padding: 5px;
+}
+
+.volume-range input {
+  width: 100px;
+}
