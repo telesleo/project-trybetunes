@@ -9,7 +9,7 @@ class TrackInfo extends React.Component {
     return (
       <div className={ styles['track-info'] }>
         <div className={ styles['track-and-artist'] }>
-          <h4>{ trackName || '' }</h4>
+          <h4 className={ styles['track-name'] }>{ trackName || '' }</h4>
           <p className={ styles['artist-name'] }>{ artistName || '' }</p>
         </div>
         { (artworkUrl) && (

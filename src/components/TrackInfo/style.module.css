@@ -11,6 +11,14 @@
   margin-bottom: 3px;
 }
 
+.track-name, .artist-name {
+  overflow: hidden;
+  text-align: end;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 350px;
+}
+
 .artist-name {
   font-size: 12px;
   margin: 0;
@@ -21,6 +29,7 @@
 .track-info {
   display: flex;
   flex-direction: row;
+  justify-content: end;
 }
 
 .album-cover {

@@ -14,7 +14,7 @@
   display: flex;
   height: 60px;
   justify-content: space-between;
-  padding: 0 80px;
+  padding: 0 10%;
 }
 
 .player-div {
