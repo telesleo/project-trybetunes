@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './style.module.css';
 import Volume from '../Volume';
+import TrackInfo from '../TrackInfo';
 
 const RANGE_UPDATE_RATE = 1000;
 const ONE_MINUTE_IN_SECONDS = 60;
@@ -154,10 +155,10 @@ class AudioPlayer extends React.Component {
             </p>
             <Volume audio={ audio } volume={ volume } setVolume={ this.setVolume } />
           </div>
-          <div className={ styles['track-info'] }>
-            <h4>{ currentSong?.trackName }</h4>
-            <p className={ styles['artist-name'] }>{ currentSong?.artistName }</p>
-          </div>
+          <TrackInfo
+            trackName={ currentSong?.trackName }
+            artistName={ currentSong?.artistName }
+          />
         </div>
       </div>
     );

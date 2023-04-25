@@ -1,0 +1,18 @@
+.track-info {
+  align-items: end;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-info h4 {
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 3px;
+}
+
+.artist-name {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  text-align: end;
+}

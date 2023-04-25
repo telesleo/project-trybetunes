@@ -76,27 +76,6 @@
   margin: auto;
 }
 
-.track-info {
-  align-items: end;
-  display: flex;
-  flex-direction: column;
-}
-
-.track-info h4 {
-  margin: 0;
-  margin-bottom: 5px;
-}
-
 .track-time {
   margin: 0 5px;
-}
-
-.artist-name {
-  margin: 0;
-  padding: 0;
-  text-align: end;
-}
-
-p {
-  font-size: 14px;
 }
