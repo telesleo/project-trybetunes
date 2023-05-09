@@ -68,8 +68,6 @@ class AudioPlayer extends React.Component {
     this.setState({ playing: true });
 
     this.updatePlayerRange();
-
-    console.log('play');
   }
 
   pauseMusic = () => {
