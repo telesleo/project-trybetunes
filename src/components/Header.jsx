@@ -44,21 +44,21 @@ class Header extends React.Component {
           />
         </div>
         <div className={ (tab === 'search') ? 'black' : '' }>
-          <Link data-testid="link-to-search" class="link" to="/search">
+          <Link data-testid="link-to-search" className="link" to="/search">
             <p>Pesquisa</p>
           </Link>
         </div>
         <div className={ (tab === 'favorites') ? 'black' : '' }>
           <Link
             data-testid="link-to-favorites"
-            class="link"
+            className="link"
             to="/favorites"
           >
             <p>Músicas Favoritas</p>
           </Link>
         </div>
         <div className={ (tab === 'profile') ? 'black' : '' }>
-          <Link data-testid="link-to-profile" class="link" to="/profile">
+          <Link data-testid="link-to-profile" className="link" to="/profile">
             <p>Perfil</p>
           </Link>
         </div>
@@ -75,7 +75,7 @@ class Header extends React.Component {
   }
 }
 Header.propTypes = {
-  tab: PropTypes.isRequired,
+  tab: PropTypes.string.isRequired,
 };
 
 export default Header;

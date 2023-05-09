@@ -25,10 +25,16 @@ class TrackInfo extends React.Component {
 }
 
 TrackInfo.propTypes = {
-  trackName: PropTypes.string.isRequired,
-  artistName: PropTypes.string.isRequired,
-  artworkUrl: PropTypes.string.isRequired,
+  trackName: PropTypes.string,
+  artistName: PropTypes.string,
+  artworkUrl: PropTypes.string,
   playing: PropTypes.bool.isRequired,
+};
+
+TrackInfo.defaultProps = {
+  trackName: undefined,
+  artistName: undefined,
+  artworkUrl: undefined,
 };
 
 export default TrackInfo;

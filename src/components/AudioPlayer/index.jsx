@@ -176,8 +176,17 @@ AudioPlayer.propTypes = {
     previewUrl: PropTypes.string,
     trackName: PropTypes.string,
     artistName: PropTypes.string,
-    artworkUrl100: PropTypes.string.isRequired,
-  }).isRequired,
+    artworkUrl100: PropTypes.string,
+  }),
+};
+
+AudioPlayer.defaultProps = {
+  currentSong: PropTypes.shape({
+    previewUrl: undefined,
+    trackName: undefined,
+    artistName: undefined,
+    artworkUrl100: undefined,
+  }),
 };
 
 export default AudioPlayer;

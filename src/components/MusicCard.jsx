@@ -66,7 +66,7 @@ class MusicCard extends React.Component {
                 id={ trackId }
                 type="checkbox"
                 checked={ favorited }
-                onClick={ this.onCheckboxChange }
+                onChange={ this.onCheckboxChange }
               />
             </label>
           </div>
@@ -77,9 +77,12 @@ class MusicCard extends React.Component {
   }
 }
 MusicCard.propTypes = {
-  favoriteSongs: PropTypes.isRequired,
-  song: PropTypes.isRequired,
-  changeFavoriteSongs: PropTypes.isRequired,
+  favoriteSongs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  song: PropTypes.shape({
+    trackName: PropTypes.string,
+    trackId: PropTypes.number,
+  }).isRequired,
+  changeFavoriteSongs: PropTypes.func.isRequired,
   updateCurrentSong: PropTypes.func.isRequired,
 };
 

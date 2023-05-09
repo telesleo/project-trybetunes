@@ -113,7 +113,7 @@ Volume.propTypes = {
   audio: PropTypes.shape({
     volume: PropTypes.number,
   }).isRequired,
-  volume: PropTypes.string.isRequired,
+  volume: PropTypes.number.isRequired,
   setVolume: PropTypes.func.isRequired,
 };
 

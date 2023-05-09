@@ -65,8 +65,8 @@ class MusicList extends React.Component {
   }
 }
 MusicList.propTypes = {
-  songs: PropTypes.isRequired,
-  updateSongs: PropTypes.isRequired,
+  songs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateSongs: PropTypes.func.isRequired,
   updateCurrentSong: PropTypes.func.isRequired,
 };
 
