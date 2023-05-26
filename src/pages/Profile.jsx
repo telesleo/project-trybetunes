@@ -30,12 +30,14 @@ class Profile extends React.Component {
         <div className="page">
           {(loading) ? <Loading /> : (
             <div>
-              <img
-                data-testid="profile-image"
-                className="profileImage"
-                src={ profile.image }
-                alt="Foto Perfil"
-              />
+              { (profile.image) && (
+                <img
+                  data-testid="profile-image"
+                  className="profileImage"
+                  src={ profile.image }
+                  alt="Foto Perfil"
+                />
+              )}
               <h2>{profile.name}</h2>
               <p>{profile.description}</p>
               <p className="email">{profile.email}</p>
