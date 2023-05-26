@@ -1,0 +1,13 @@
+.album-preview {
+  display: flex;
+  margin: 40px;
+}
+
+.album-artwork {
+  height: 100px;
+}
+
+.album-info {
+  margin-left: 15px;
+  text-align: start;
+}

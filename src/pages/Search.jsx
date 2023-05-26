@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from '../components/Loading';
+import AlbumPreview from '../components/AlbumPreview';
 
 class Search extends React.Component {
   constructor() {
@@ -91,28 +91,23 @@ class Search extends React.Component {
     let artists;
     if (showArtists) {
       if (searchResults.length > 0) {
-        const listOfArtists = searchResults.map((artist, index) => (
-          <li key={ index }>
-            <Link
-              to={ {
-                pathname: `/album/${artist.collectionId}`,
-                artistId: artist.artistId,
-                artistName: artist.artistName,
-              } }
-              data-testid={ `link-to-album-${artist.collectionId}` }
-              className="link"
-            >
-              {artist.collectionName}
-            </Link>
-          </li>));
+        const albumList = searchResults.map((album) => (
+          <AlbumPreview
+            key={ album.collectionId }
+            albumId={ album.collectionId }
+            albumName={ album.collectionName }
+            artworkUrl={ album.artworkUrl100 }
+            artistId={ album.artistId }
+            artistName={ album.artistName }
+          />));
 
         artists = (
-          <>
+          <div>
             <h2>{`Resultado de álbuns de: ${artistSearched}` }</h2>
-            <ul className="list">
-              {listOfArtists}
-            </ul>
-          </>
+            <div className="list">
+              {albumList}
+            </div>
+          </div>
         );
       } else {
         artists = <h2>Nenhum álbum foi encontrado</h2>;
