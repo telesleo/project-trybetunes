@@ -28,32 +28,36 @@ class App extends React.Component {
     return (
       <div>
         <BrowserRouter>
-          <Route exact path="/" component={ Login } />
-          <Route exact path="/search" component={ Search } />
-          <Route
-            exact
-            path="/album/:id"
-            render={ (props) => (
-              <Album { ...props } updateCurrentSong={ this.updateCurrentSong } />
-            ) }
-          />
-          <Route
-            exact
-            path="/favorites"
-            render={ (props) => (
-              <Favorites { ...props } updateCurrentSong={ this.updateCurrentSong } />
-            ) }
-          />
-          <Route exact path="/profile" component={ Profile } />
-          <Route exact path="/profile/edit" component={ ProfileEdit } />
-          <Route
-            path={
-              ['/search', '/favorites', '/profile', '/profile/edit', '/album/:id']
-            }
-            render={ () => (
-              <AudioPlayer currentSong={ currentSong } />
-            ) }
-          />
+          <div className="content">
+            <Route exact path="/" component={ Login } />
+            <Route exact path="/search" component={ Search } />
+            <Route
+              exact
+              path="/album/:id"
+              render={ (props) => (
+                <Album { ...props } updateCurrentSong={ this.updateCurrentSong } />
+              ) }
+            />
+            <Route
+              exact
+              path="/favorites"
+              render={ (props) => (
+                <Favorites { ...props } updateCurrentSong={ this.updateCurrentSong } />
+              ) }
+            />
+            <Route exact path="/profile" component={ Profile } />
+            <Route exact path="/profile/edit" component={ ProfileEdit } />
+          </div>
+          <div className="audio-player">
+            <Route
+              path={
+                ['/search', '/favorites', '/profile', '/profile/edit', '/album/:id']
+              }
+              render={ () => (
+                <AudioPlayer currentSong={ currentSong } />
+              ) }
+            />
+          </div>
         </BrowserRouter>
       </div>
     );

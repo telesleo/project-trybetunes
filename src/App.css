@@ -4,6 +4,10 @@ body {
   text-align: center;
 }
 
+.content {
+  margin-bottom: 60px;
+}
+
 .page {
   padding: 30px;
 }
