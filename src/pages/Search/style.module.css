@@ -1,0 +1,14 @@
+.search-page {
+  margin: 20px;
+}
+
+.result-list {
+  margin: 0 150px;
+}
+
+@media only screen and ( max-width : 700px ) {
+
+  .result-list {
+    margin: 0 20px;
+  }
+}

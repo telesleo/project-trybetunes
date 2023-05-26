@@ -1,8 +1,9 @@
 import React from 'react';
-import Header from '../components/Header';
-import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import Loading from '../components/Loading';
-import AlbumPreview from '../components/AlbumPreview';
+import Header from '../../components/Header';
+import searchAlbumsAPI from '../../services/searchAlbumsAPI';
+import Loading from '../../components/Loading';
+import AlbumPreview from '../../components/AlbumPreview';
+import styles from './style.module.css';
 
 class Search extends React.Component {
   constructor() {
@@ -104,7 +105,7 @@ class Search extends React.Component {
         artists = (
           <div>
             <h2>{`Resultado de álbuns de: ${artistSearched}` }</h2>
-            <div className="list">
+            <div className={ styles['result-list'] }>
               {albumList}
             </div>
           </div>
@@ -117,7 +118,7 @@ class Search extends React.Component {
     return (
       <div data-testid="page-search">
         <Header tab="search" />
-        <div className="page">
+        <div className={ styles['search-page'] }>
           {searchElements}
           {artists}
         </div>
