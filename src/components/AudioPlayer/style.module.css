@@ -12,9 +12,7 @@
   align-items: center;
   background-color: rgb(20, 20, 20);
   display: flex;
-  height: 60px;
-  justify-content: space-between;
-  padding: 0 10%;
+  padding: 10px 150px;
 }
 
 .player-div {
@@ -28,6 +26,7 @@
   background: linear-gradient(to right, #422550 0%, #422550 50%, #494949 50%, #494949 100%);
   border-radius: 7px;
   height: 7px;
+  max-width: 250px;
   width: 250px;
 }
 
@@ -78,4 +77,16 @@
 
 .track-time {
   margin: 0 5px;
+}
+
+@media only screen and ( max-width : 1000px ) {
+
+  .player-content {
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  .range {
+    width: auto;
+  }
 }

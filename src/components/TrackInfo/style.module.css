@@ -38,6 +38,7 @@
   border-radius: 100px;
   height: 50px;
   margin-left: 10px;
+  width: 50px;
 }
 
 .rotating {
@@ -52,5 +53,21 @@
 
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and ( max-width : 1000px ) {
+
+  .track-info {
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+
+  .track-name, .artist-name {
+    text-align: center;
+  }
+
+  .album-cover {
+    display: none;
   }
 }

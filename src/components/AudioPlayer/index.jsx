@@ -125,7 +125,12 @@ class AudioPlayer extends React.Component {
 
     return (
       <div className={ styles.player }>
-        <div className={ styles['player-content'] }>
+        <div
+          className={ styles['player-content'] }
+          style={ {
+            justifyContent: (currentSong?.trackName) ? 'space-between' : 'center',
+          } }
+        >
           <div className={ styles['player-div'] }>
             <button
               className={ `${styles['play-button']} ${styles.button}` }
@@ -157,12 +162,16 @@ class AudioPlayer extends React.Component {
             </p>
             <Volume audio={ audio } volume={ volume } setVolume={ this.setVolume } />
           </div>
-          <TrackInfo
-            trackName={ currentSong?.trackName }
-            artistName={ currentSong?.artistName }
-            artworkUrl={ currentSong?.artworkUrl100 }
-            playing={ playing }
-          />
+          {
+            (currentSong?.trackName) && (
+              <TrackInfo
+                trackName={ currentSong?.trackName }
+                artistName={ currentSong?.artistName }
+                artworkUrl={ currentSong?.artworkUrl100 }
+                playing={ playing }
+              />
+            )
+          }
         </div>
       </div>
     );

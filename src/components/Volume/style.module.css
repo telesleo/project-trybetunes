@@ -11,11 +11,19 @@
 }
 
 .volume-range input {
-  width: 100px;
+  max-width: 100px;
+  width: fit-content;
 }
 
 .volume {
   align-items: center;
   display: flex;
   justify-content: center;
+}
+
+@media only screen and ( max-width : 1000px ) {
+
+  .volume-range {
+    transform: translate(0, -70px) rotate(-90deg);
+  }
 }
